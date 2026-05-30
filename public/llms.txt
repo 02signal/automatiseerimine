@@ -1,0 +1,17 @@
+# Automatiseerimine.ee
+
+Automatiseerimine.ee is an Estonian-language site by Ettevõtluskeskus OÜ for micro and small business owners who want to reduce repetitive manual work.
+
+Primary audience: older or non-technical Estonian business owners.
+
+Main promise: identify one repeated business task that can be simplified with automation or AI, without starting from technical jargon.
+
+Core services:
+- Free 10-minute quick check via 02Signal
+- 490 EUR + VAT owner advisory session
+- Automation start plan from 1,900 EUR + VAT
+
+Useful links:
+- Homepage: https://automatiseerimine.ee/
+- Quick check: https://02signal.ai/et/kiirkontroll/?utm_source=automatiseerimine.ee&utm_medium=microsite&utm_campaign=automatiseerimine
+- Contact: info@02signal.ai, +372 5818 0435

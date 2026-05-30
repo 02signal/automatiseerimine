@@ -1,0 +1,203 @@
+---
+import "../styles/global.css";
+
+const quickCheckUrl =
+  "https://02signal.ai/et/kiirkontroll/?utm_source=automatiseerimine.ee&utm_medium=microsite&utm_campaign=automatiseerimine";
+const emailHref =
+  "mailto:info@02signal.ai?subject=Automatiseerimine.ee%20-%20t%C3%BC%C3%BCtu%20t%C3%B6%C3%B6";
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://automatiseerimine.ee/#organization",
+      name: "Automatiseerimine.ee",
+      legalName: "Ettevõtluskeskus OÜ",
+      url: "https://automatiseerimine.ee/",
+      email: "info@02signal.ai",
+      telephone: "+37258180435"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://automatiseerimine.ee/#service",
+      name: "Korduvate tööde automatiseerimise nõu väikeettevõttele",
+      serviceType: "Äri automatiseerimine, töövoogude lihtsustamine, AI abiline",
+      provider: { "@id": "https://automatiseerimine.ee/#organization" },
+      areaServed: "EE",
+      audience: {
+        "@type": "Audience",
+        audienceType: "Eesti mikro- ja väikeettevõtte omanikud"
+      },
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "EUR",
+        lowPrice: 0,
+        highPrice: 3900
+      }
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatiseerimine.ee | Vähem käsitööd väikeettevõttes</title>
+    <meta
+      name="description"
+      content="Lihtsas keeles abi Eesti väikeettevõtte omanikule: leiame ühe korduva töö, mida saab automatiseerida või AI abil lihtsamaks teha."
+    />
+    <link rel="canonical" href="https://automatiseerimine.ee/" />
+    <meta property="og:title" content="Automatiseerimine.ee | Vähem käsitööd väikeettevõttes" />
+    <meta
+      property="og:description"
+      content="Näidake meile ühte tüütut korduvat tööd. Ütleme maakeeli, kas seda saab lihtsamaks teha ja mis see võiks maksta."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://automatiseerimine.ee/" />
+    <meta property="og:image" content="https://automatiseerimine.ee/hero-automatiseerimine.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Automatiseerimine.ee</a>
+        <div class="navlinks">
+          <a href="#mured">Mured</a>
+          <a href="#kuidas">Kuidas käib</a>
+          <a href="#hinnad">Hinnad</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <span class="eyebrow">Vähem käsitööd. Rohkem rahu.</span>
+          <h1>Mis töö võtab teil iga nädal asjatult aega?</h1>
+          <p>
+            Pakkumised, e-kirjad, tellimused, aruanded, Excelid või meeldetuletused.
+            Näidake meile ühte tüütut tööd ja ütleme maakeeli, kas seda saab lihtsamaks teha.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href={quickCheckUrl}>Tee 10 min tasuta kontroll</a>
+            <a class="btn btn-secondary" href="tel:+37258180435">Helista +372 5818 0435</a>
+          </div>
+          <div class="proof">
+            <div><strong>0 €</strong><span>esmane kiirkontroll</span></div>
+            <div><strong>490 € + KM</strong><span>omaniku nõu ja otsus</span></div>
+            <div><strong>al 1 900 €</strong><span>selge stardiplaan</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="mured" class="white">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Kust tavaliselt alustame</span>
+            <h2>Kui inimene teeb sama asja kümneid kordi, on seal tihti lihtne võit.</h2>
+            <p>
+              Me ei alusta tehnoloogiast. Alustame küsimusest: milline töö võtab aega,
+              kordub sageli ja on piisavalt lihtne, et inimene saab tulemust üle vaadata?
+            </p>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <div class="number">1</div>
+              <h3>Pakkumised ja vastused</h3>
+              <p>Kliendile vastuse või pakkumise esimene mustand valmib kiiremini, inimene vaatab üle.</p>
+            </article>
+            <article class="card">
+              <div class="number">2</div>
+              <h3>Excel ja kopeerimine</h3>
+              <p>Andmeid ei pea iga kord käsitsi ühest kohast teise tõstma.</p>
+            </article>
+            <article class="card">
+              <div class="number">3</div>
+              <h3>Meeldetuletused ja teavitused</h3>
+              <p>Töö ei jää seisma ainult sellepärast, et keegi unustas kellelegi kirjutada.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kuidas" class="green">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Lihtne tööviis</span>
+            <h2>Kolm sammu enne, kui midagi ehitame.</h2>
+            <p>See hoiab ära olukorra, kus kulutate raha tööriistale, mida keegi hiljem ei kasuta.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><strong>01</strong><div><h3>Nimetame tüütu töö ära</h3><p>Mis võtab aega? Kes teeb? Kui tihti? Mis on tulemus?</p></div></div>
+            <div class="step"><strong>02</strong><div><h3>Kontrollime, kas seda saab lihtsustada</h3><p>Kas info on olemas, viga ei ole liiga kallis ja inimene saab tulemuse üle vaadata?</p></div></div>
+            <div class="step"><strong>03</strong><div><h3>Ütleme ausalt järgmise sammu</h3><p>Kas teha väike abiline, alustada stardiplaanist või jätta praegu tegemata.</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="hinnad" class="white">
+        <div class="section-inner">
+          <div class="section-head">
+            <span class="kicker">Hind peab olema arusaadav</span>
+            <h2>Alustame väikese riskiga.</h2>
+          </div>
+          <div class="grid-3">
+            <article class="card price">
+              <h3>Kiirkontroll</h3>
+              <p>Saate esmase pildi, kas teie töös on automatiseerimise koht.</p>
+              <strong>0 €</strong>
+              <ul class="check"><li>10 minutit</li><li>tulemus kohe ekraanil</li><li>hea ettevalmistus kõneks</li></ul>
+            </article>
+            <article class="card price">
+              <h3>Omaniku nõu</h3>
+              <p>Vaatame 2-3 tüütut tööd läbi ja anname selge soovituse.</p>
+              <strong>490 € + KM</strong>
+              <ul class="check"><li>90 min kohtumine</li><li>üks soovitatud esimene töö</li><li>hinnavahemik ja riskid</li></ul>
+            </article>
+            <article class="card price">
+              <h3>Stardiplaan</h3>
+              <p>Kui kohti on mitu, valime ühe mõistliku alguse ja paneme plaani kirja.</p>
+              <strong>al 1 900 € + KM</strong>
+              <ul class="check"><li>korduvate tööde kaart</li><li>mida teha ja mida vältida</li><li>järgmine ehituse samm</li></ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontakt" class="green">
+        <div class="section-inner contact">
+          <div>
+            <span class="kicker">Räägime konkreetselt</span>
+            <h2>Näidake ühte tööd, mis teid praegu tüütab.</h2>
+            <p>
+              Kui seda ei ole mõistlik automatiseerida, ütleme seda kohe. Kui on mõistlik,
+              pakume väikese ja kontrollitava esimese sammu.
+            </p>
+            <div class="inline-actions">
+              <a class="btn btn-primary" href={quickCheckUrl}>Tee tasuta kontroll</a>
+              <a class="btn btn-secondary" href="tel:+37258180435">Helista +372 5818 0435</a>
+            </div>
+          </div>
+          <aside class="contact-card">
+            <h3>Kirjutage otse</h3>
+            <p>Ettevõtluskeskus OÜ / 02Signal</p>
+            <p><a href={emailHref}>info@02signal.ai</a></p>
+            <p><a href="tel:+37258180435">+372 5818 0435</a></p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <strong>Automatiseerimine.ee</strong>
+        <span>Ettevõtluskeskus OÜ · kanal 02Signal praktilisse töövoogu</span>
+      </div>
+    </footer>
+  </body>
+</html>

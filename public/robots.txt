@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://automatiseerimine.ee/sitemap-index.xml
