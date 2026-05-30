@@ -14,4 +14,5 @@ Core services:
 Useful links:
 - Homepage: https://automatiseerimine.ee/
 - Quick check: https://02signal.ai/et/kiirkontroll/?utm_source=automatiseerimine.ee&utm_medium=microsite&utm_campaign=automatiseerimine
+- Privacy: https://automatiseerimine.ee/privaatsus/
 - Contact: info@02signal.ai, +372 5818 0435
