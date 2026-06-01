@@ -1,0 +1,107 @@
+---
+import Analytics from "../components/Analytics.astro";
+import "../styles/global.css";
+
+const quickCheckUrl =
+  "https://02signal.ai/et/kiirkontroll/?utm_source=automatiseerimine.ee&utm_medium=seo&utm_campaign=korduv-too";
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Millist korduvat tööd tasub ettevõttes esimesena automatiseerida?",
+  description: "Lihtne selgitus ettevõtte omanikule: kuidas ära tunda korduv töö, mille automatiseerimine võib kiiresti aega säästa.",
+  author: {
+    "@type": "Organization",
+    name: "Ettevõtluskeskus OÜ"
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Automatiseerimine.ee"
+  },
+  inLanguage: "et",
+  mainEntityOfPage: "https://automatiseerimine.ee/korduv-too/"
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Korduv töö ettevõttes | Automatiseerimine.ee</title>
+    <meta
+      name="description"
+      content="Korduva töö automatiseerimine sobib siis, kui sama tegevus võtab iga nädal aega, info on olemas ja inimene saab tulemuse üle vaadata."
+    />
+    <link rel="canonical" href="https://automatiseerimine.ee/korduv-too/" />
+    <meta property="og:title" content="Millist korduvat tööd tasub automatiseerida?" />
+    <meta property="og:description" content="Praktiline seletus 65+ omanikule: kuidas aru saada, kas tüütu töö sobib esimeseks automaatikaks." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://automatiseerimine.ee/korduv-too/" />
+    <meta property="og:image" content="https://automatiseerimine.ee/hero-automatiseerimine.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Automatiseerimine.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/excelist-automaatseks/">Excel</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/privaatsus/">Privaatsus</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="legal-page">
+      <section class="white">
+        <div class="section-inner article">
+          <span class="kicker">Korduv töö</span>
+          <h1>Millist tööd tasub esimesena automatiseerida?</h1>
+          <p>
+            Hea esimene töö ei ole kõige suurem probleem ettevõttes. Hea esimene töö on piisavalt väike,
+            kordub sageli ja annab kiiresti selge tulemuse.
+          </p>
+
+          <div class="legal-copy">
+            <div>
+              <h2>Lihtne test omanikule</h2>
+              <p>Kui vastate kolmele küsimusele jaatavalt, võib töö sobida esimeseks automaatikaks.</p>
+              <ul class="check">
+                <li>Kas sama tegevust tehakse iga nädal mitu korda?</li>
+                <li>Kas vajalik info on juba olemas: e-mailis, Excelis, vormis või süsteemis?</li>
+                <li>Kas inimene saab tulemuse enne kliendile või töötajale saatmist üle vaadata?</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2>Näited, kust tavaliselt alustame</h2>
+              <ul class="check">
+                <li>pakkumise esimene mustand kliendi päringu põhjal</li>
+                <li>tellimuse info koondamine ühest kohast teise</li>
+                <li>meeldetuletus töötajale, kliendile või partnerile</li>
+                <li>nädala aruande mustand olemasolevate andmete põhjal</li>
+                <li>kliendi küsimuse esmane vastus, mille inimene kinnitab</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2>Millal mitte alustada?</h2>
+              <p>
+                Ärge alustage kohast, kus viga on väga kallis, andmed on segased või keegi ei oska öelda,
+                milline hea tulemus välja näeb. Sellisel juhul tuleb enne töö lihtsamaks kirjeldada.
+              </p>
+            </div>
+
+            <div class="inline-actions">
+              <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="repeated_work_quick_check">Tee 10 min kontroll</a>
+              <a class="btn btn-light" href="tel:+37258180435" data-track-event="phone_click" data-track-label="repeated_work_phone">Helista +372 5818 0435</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

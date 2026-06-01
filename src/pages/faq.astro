@@ -1,0 +1,99 @@
+---
+import Analytics from "../components/Analytics.astro";
+import "../styles/global.css";
+
+const quickCheckUrl =
+  "https://02signal.ai/et/kiirkontroll/?utm_source=automatiseerimine.ee&utm_medium=seo&utm_campaign=faq";
+const faq = [
+  {
+    q: "Kas automatiseerimine tähendab kohe suurt IT-projekti?",
+    a: "Ei. Väikeettevõttes on hea algus sageli vorm, teavitus, tabeli korrastus või AI mustand, mida inimene kontrollib."
+  },
+  {
+    q: "Kas AI võib ise kliendile vastata?",
+    a: "Alguses pigem mitte. Turvalisem on lasta AI-l teha mustand ja inimesel see üle vaadata."
+  },
+  {
+    q: "Milline töö sobib esimeseks?",
+    a: "Töö, mis kordub sageli, mille info on olemas ja mille tulemust saab inimene lihtsalt kontrollida."
+  },
+  {
+    q: "Mis siis, kui meie info on segane?",
+    a: "Siis alustame info korrastamisest. Halb automaatika teeb segaduse lihtsalt kiiremini nähtavaks."
+  },
+  {
+    q: "Kui palju esimene samm maksab?",
+    a: "Kiirkontroll on tasuta. Omaniku nõu algab 490 eurost + KM ja stardiplaan 1900 eurost + KM."
+  }
+];
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a
+    }
+  }))
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatiseerimise küsimused | Automatiseerimine.ee</title>
+    <meta
+      name="description"
+      content="Lihtsad vastused ettevõtte omanikule: millal automatiseerida, kas AI võib vastata, mida teha Exceliga ja kui palju esimene samm maksab."
+    />
+    <link rel="canonical" href="https://automatiseerimine.ee/faq/" />
+    <meta property="og:title" content="Automatiseerimise küsimused lihtsas keeles" />
+    <meta property="og:description" content="FAQ Eesti väikeettevõtte omanikule, kes tahab vähendada korduvat käsitööd." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://automatiseerimine.ee/faq/" />
+    <meta property="og:image" content="https://automatiseerimine.ee/hero-automatiseerimine.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Automatiseerimine.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/korduv-too/">Korduv töö</a>
+          <a href="/excelist-automaatseks/">Excel</a>
+          <a href="/privaatsus/">Privaatsus</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="legal-page">
+      <section class="white">
+        <div class="section-inner article">
+          <span class="kicker">FAQ</span>
+          <h1>Korduma kippuvad küsimused automatiseerimise kohta</h1>
+          <p>Vastused on kirjutatud ettevõtte omanikule, mitte IT-spetsialistile.</p>
+
+          <div class="legal-copy">
+            {faq.map((item) => (
+              <div>
+                <h2>{item.q}</h2>
+                <p>{item.a}</p>
+              </div>
+            ))}
+            <div class="inline-actions">
+              <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="faq_quick_check">Tee 10 min kontroll</a>
+              <a class="btn btn-light" href="tel:+37258180435" data-track-event="phone_click" data-track-label="faq_phone">Helista +372 5818 0435</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

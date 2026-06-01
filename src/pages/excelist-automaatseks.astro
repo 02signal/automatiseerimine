@@ -1,0 +1,104 @@
+---
+import Analytics from "../components/Analytics.astro";
+import "../styles/global.css";
+
+const quickCheckUrl =
+  "https://02signal.ai/et/kiirkontroll/?utm_source=automatiseerimine.ee&utm_medium=seo&utm_campaign=excelist-automaatseks";
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Excelist automaatseks: millal käsitsi kopeerimine ära lõpetada?",
+  description: "Selgitus Eesti väikeettevõtte omanikule: millal Excel on kasulik tööriist ja millal ta muutub käsitsi töö allikaks.",
+  author: {
+    "@type": "Organization",
+    name: "Ettevõtluskeskus OÜ"
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Automatiseerimine.ee"
+  },
+  inLanguage: "et",
+  mainEntityOfPage: "https://automatiseerimine.ee/excelist-automaatseks/"
+};
+---
+
+<!doctype html>
+<html lang="et">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Excelist automaatseks | Automatiseerimine.ee</title>
+    <meta
+      name="description"
+      content="Kui sama infot kopeeritakse e-mailist Excelisse ja edasi teise süsteemi, võib väike automaatika säästa aega ja vähendada vigu."
+    />
+    <link rel="canonical" href="https://automatiseerimine.ee/excelist-automaatseks/" />
+    <meta property="og:title" content="Excelist automaatseks, ilma suure IT-projektita" />
+    <meta property="og:description" content="Millal Excel aitab ja millal on aeg teha väike vorm, teavitus või andmevoog?" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://automatiseerimine.ee/excelist-automaatseks/" />
+    <meta property="og:image" content="https://automatiseerimine.ee/hero-automatiseerimine.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Põhinavigeerimine">
+        <a class="brand" href="/">Automatiseerimine.ee</a>
+        <div class="navlinks">
+          <a href="/">Avaleht</a>
+          <a href="/korduv-too/">Korduv töö</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/privaatsus/">Privaatsus</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="legal-page">
+      <section class="white">
+        <div class="section-inner article">
+          <span class="kicker">Excel ja kopeerimine</span>
+          <h1>Excel ei ole probleem. Käsitsi ümberkirjutamine on probleem.</h1>
+          <p>
+            Excel on väikeettevõttes tihti väga mõistlik tööriist. Probleem algab siis,
+            kui sama info liigub käsitsi e-mailist Excelisse, Excelist arveprogrammi ja hiljem veel aruandesse.
+          </p>
+
+          <div class="legal-copy">
+            <div>
+              <h2>Millal tasub sekkuda?</h2>
+              <ul class="check">
+                <li>üks inimene peab iga päev andmeid tabelisse kopeerima</li>
+                <li>tabeli õigsust kontrollitakse käsitsi</li>
+                <li>omanik peab helistama, et teada saada, mis seisus töö on</li>
+                <li>vigade põhjus on enamasti ümberkirjutamine</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2>Esimene lahendus ei pea olema uus tarkvara</h2>
+              <p>
+                Sageli piisab vormist, automaatsest teavitusest või lihtsast andmevoost. Tabel võib alles jääda,
+                aga inimene ei pea sama infot mitu korda ümber tõstma.
+              </p>
+            </div>
+
+            <div>
+              <h2>Mida omanik saab teada?</h2>
+              <p>
+                Me vaatame, kas teie Exceli töö on lihtsalt korrastatav või on mõistlik ehitada väike automaatne samm:
+                vorm, teavitus, kokkuvõte, CRM-i sisestus või AI mustand.
+              </p>
+            </div>
+
+            <div class="inline-actions">
+              <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="excel_quick_check">Kontrollin oma Exceli töö ära</a>
+              <a class="btn btn-light" href="tel:+37258180435" data-track-event="phone_click" data-track-label="excel_phone">Helista +372 5818 0435</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 ---
+import Analytics from "../components/Analytics.astro";
 import "../styles/global.css";
 
 const quickCheckUrl =
@@ -33,8 +34,60 @@ const schema = {
         priceCurrency: "EUR",
         lowPrice: 0,
         highPrice: 3900
+      },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Automatiseerimise esimesed sammud",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            name: "Kiirkontroll",
+            price: "0",
+            priceCurrency: "EUR"
+          },
+          {
+            "@type": "Offer",
+            name: "Omaniku nõu",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              minPrice: "490",
+              priceCurrency: "EUR"
+            }
+          },
+          {
+            "@type": "Offer",
+            name: "Stardiplaan",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              minPrice: "1900",
+              priceCurrency: "EUR"
+            }
+          }
+        ]
       }
-    }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://automatiseerimine.ee/#faq",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Millist tööd tasub esimesena automatiseerida?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Hea esimene töö kordub sageli, kasutab juba olemasolevat infot ja inimene saab tulemuse enne kasutamist üle vaadata."
+          }
+        },
+        {
+          "@type": "Question",
+          name: "Kas väikeettevõte peab kohe suure süsteemi ostma?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Ei. Tihti piisab alguses lihtsast vormist, teavitusest, tabeli korrastamisest või AI mustandist, mida inimene kontrollib."
+          }
+        }
+      ]
+      }
   ]
 };
 ---
@@ -60,6 +113,7 @@ const schema = {
     <meta property="og:image" content="https://automatiseerimine.ee/hero-automatiseerimine.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
   </head>
   <body>
     <header class="topbar">
@@ -69,6 +123,9 @@ const schema = {
           <a href="#mured">Mured</a>
           <a href="#kuidas">Kuidas käib</a>
           <a href="#hinnad">Hinnad</a>
+          <a href="/korduv-too/">Korduv töö</a>
+          <a href="/excelist-automaatseks/">Excel</a>
+          <a href="/faq/">FAQ</a>
           <a href="#kontakt">Kontakt</a>
         </div>
       </nav>
@@ -84,8 +141,8 @@ const schema = {
             Näidake meile ühte tüütut tööd ja ütleme maakeeli, kas seda saab lihtsamaks teha.
           </p>
           <div class="actions">
-            <a class="btn btn-primary" href={quickCheckUrl}>Tee 10 min tasuta kontroll</a>
-            <a class="btn btn-secondary" href="tel:+37258180435">Helista +372 5818 0435</a>
+            <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="hero_quick_check">Tee 10 min tasuta kontroll</a>
+            <a class="btn btn-secondary" href="tel:+37258180435" data-track-event="phone_click" data-track-label="hero_phone">Helista +372 5818 0435</a>
           </div>
           <div class="proof">
             <div><strong>Kordub</strong><span>sama päring, sama tabel, sama meeldetuletus</span></div>
@@ -119,16 +176,19 @@ const schema = {
               <div class="number">1</div>
               <h3>Pakkumised ja vastused</h3>
               <p>Kliendile vastuse või pakkumise esimene mustand valmib kiiremini, inimene vaatab üle.</p>
+              <a href="/korduv-too/" data-track-event="cta_click" data-track-label="card_repeated_work">Vaata korduva töö näiteid</a>
             </article>
             <article class="card">
               <div class="number">2</div>
               <h3>Excel ja kopeerimine</h3>
               <p>Andmeid ei pea iga kord käsitsi ühest kohast teise tõstma.</p>
+              <a href="/excelist-automaatseks/" data-track-event="cta_click" data-track-label="card_excel">Vaata Exceli näiteid</a>
             </article>
             <article class="card">
               <div class="number">3</div>
               <h3>Meeldetuletused ja teavitused</h3>
               <p>Töö ei jää seisma ainult sellepärast, et keegi unustas kellelegi kirjutada.</p>
+              <a href="/faq/" data-track-event="cta_click" data-track-label="card_faq">Loe lihtsad küsimused</a>
             </article>
           </div>
         </div>
@@ -188,15 +248,15 @@ const schema = {
               pakume väikese ja kontrollitava esimese sammu.
             </p>
             <div class="inline-actions">
-              <a class="btn btn-primary" href={quickCheckUrl}>Tee tasuta kontroll</a>
-              <a class="btn btn-secondary" href="tel:+37258180435">Helista +372 5818 0435</a>
+              <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="contact_quick_check">Tee tasuta kontroll</a>
+              <a class="btn btn-secondary" href="tel:+37258180435" data-track-event="phone_click" data-track-label="contact_phone">Helista +372 5818 0435</a>
             </div>
           </div>
           <aside class="contact-card">
             <h3>Kirjutage otse</h3>
             <p>Ettevõtluskeskus OÜ / 02Signal</p>
-            <p><a href={emailHref}>info@02signal.ai</a></p>
-            <p><a href="tel:+37258180435">+372 5818 0435</a></p>
+            <p><a href={emailHref} data-track-event="email_click" data-track-label="contact_email">info@02signal.ai</a></p>
+            <p><a href="tel:+37258180435" data-track-event="phone_click" data-track-label="contact_card_phone">+372 5818 0435</a></p>
           </aside>
         </div>
       </section>
@@ -205,7 +265,13 @@ const schema = {
     <footer class="footer">
       <div class="footer-inner">
         <strong>Automatiseerimine.ee</strong>
-        <span>Ettevõtluskeskus OÜ · kanal 02Signal praktilisse töövoogu · <a href="/privaatsus/">Privaatsus</a></span>
+        <span>
+          Ettevõtluskeskus OÜ · kanal 02Signal praktilisse töövoogu ·
+          <a href="/korduv-too/">Korduv töö</a> ·
+          <a href="/excelist-automaatseks/">Excelist automaatseks</a> ·
+          <a href="/faq/">FAQ</a> ·
+          <a href="/privaatsus/">Privaatsus</a>
+        </span>
       </div>
     </footer>
   </body>

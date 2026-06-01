@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://automatiseerimine.ee/sitemap-index.xml
+
+# Agentidele ja LLM-idele:
+# Kokkuvõte: https://automatiseerimine.ee/llms.txt
+# Struktureeritud profiil: https://automatiseerimine.ee/site-profile.json

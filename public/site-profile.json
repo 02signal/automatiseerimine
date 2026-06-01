@@ -1,0 +1,61 @@
+{
+  "site": "https://automatiseerimine.ee",
+  "name": "Automatiseerimine.ee",
+  "legal_owner": "Ettevõtluskeskus OÜ",
+  "language": "et",
+  "country": "EE",
+  "contact": {
+    "email": "info@02signal.ai",
+    "phone": "+37258180435"
+  },
+  "audience": [
+    "Eesti mikro- ja väikeettevõtte omanikud",
+    "vanemad või mittetehnilised ettevõtjad",
+    "ettevõtted, kus korduvad tööd võtavad igal nädalal liiga palju aega"
+  ],
+  "positioning": "Aidata omanikul leida üks korduv käsitöö, mille saab teha lihtsamaks vormi, teavituse, andmevoo või AI mustandiga.",
+  "pain_points": [
+    "sama info kopeeritakse e-mailist Excelisse ja sealt edasi teise süsteemi",
+    "omanik või võtmetöötaja peab samu meeldetuletusi käsitsi saatma",
+    "pakkumiste, vastuste või aruannete esimene mustand võtab liiga kaua aega",
+    "töö jääb seisma, sest info ei liigu õigel ajal õigesse kohta"
+  ],
+  "offers": [
+    {
+      "name": "Kiirkontroll",
+      "price_eur": 0,
+      "delivery": "10 minutit"
+    },
+    {
+      "name": "Omaniku nõu",
+      "from_price_eur": 490,
+      "vat": "not included"
+    },
+    {
+      "name": "Stardiplaan",
+      "from_price_eur": 1900,
+      "vat": "not included"
+    }
+  ],
+  "conversion_events": [
+    "cta_click",
+    "quick_check_click",
+    "phone_click",
+    "email_click",
+    "partner_site_click"
+  ],
+  "related_sites": [
+    {
+      "site": "https://teekaart.ee",
+      "purpose": "Kui omanik ei tea, kas alustada toetuse, digitaliseerimise või automatiseerimisega"
+    },
+    {
+      "site": "https://digitaliseerimine.ee",
+      "purpose": "Paber, Excel, vana tarkvara ja info liikumine korda"
+    },
+    {
+      "site": "https://digiteekaart.ee",
+      "purpose": "EIS digiteekaardi ja toetuse eelhindamine"
+    }
+  ]
+}
