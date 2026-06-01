@@ -37,7 +37,17 @@
       "vat": "not included"
     }
   ],
+  "interactive_tools": [
+    {
+      "name": "Automatiseerimise sobivuse kontroll",
+      "purpose": "Omanik saab viie lihtsa küsimusega aru, kas üks korduv töö sobib väikeseks automaatikaks.",
+      "primary_event": "tool_completed"
+    }
+  ],
   "conversion_events": [
+    "tool_start",
+    "tool_completed",
+    "result_high_intent",
     "cta_click",
     "quick_check_click",
     "phone_click",

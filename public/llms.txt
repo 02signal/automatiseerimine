@@ -6,6 +6,9 @@ Primary audience: older or non-technical Estonian business owners.
 
 Main promise: identify one repeated business task that can be simplified with automation or AI, without starting from technical jargon.
 
+Interactive tool:
+- Automatiseerimise sobivuse kontroll: a five-question check that helps an owner understand whether one repeated task is a good first automation candidate. It looks for repetition, similar inputs, human review, controlled risk and one clear responsible person.
+
 Core services:
 - Free 10-minute quick check via 02Signal
 - 490 EUR + VAT owner advisory session

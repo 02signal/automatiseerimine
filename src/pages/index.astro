@@ -121,6 +121,7 @@ const schema = {
         <a class="brand" href="/">Automatiseerimine.ee</a>
         <div class="navlinks">
           <a href="#mured">Mured</a>
+          <a href="#kontroll">Kontroll</a>
           <a href="#kuidas">Kuidas käib</a>
           <a href="#hinnad">Hinnad</a>
           <a href="/korduv-too/">Korduv töö</a>
@@ -190,6 +191,79 @@ const schema = {
               <p>Töö ei jää seisma ainult sellepärast, et keegi unustas kellelegi kirjutada.</p>
               <a href="/faq/" data-track-event="cta_click" data-track-label="card_faq">Loe lihtsad küsimused</a>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kontroll" class="white">
+        <div class="section-inner tool-grid">
+          <div>
+            <span class="kicker">Kiire kontroll</span>
+            <h2>Kas seda tööd tasub automaatseks teha?</h2>
+            <p>
+              Vastake viiele lihtsale küsimusele. Tulemus ei ole lõplik otsus, aga annab omanikule
+              selge tunde, kas kõne või väike plaan on mõistlik.
+            </p>
+            <ul class="check">
+              <li>hea esimene töö kordub sageli</li>
+              <li>inimene saab alguses tulemuse üle vaadata</li>
+              <li>viga ei tohi kohe kalliks minna</li>
+            </ul>
+          </div>
+
+          <div class="tool-card" data-automation-tool>
+            <div class="tool-questions">
+              <label>
+                <span>Kas sama töö kordub iga nädal?</span>
+                <select data-auto-question>
+                  <option value="2">Jah</option>
+                  <option value="1">Mõnikord</option>
+                  <option value="0">Ei</option>
+                </select>
+              </label>
+              <label>
+                <span>Kas sisend on tavaliselt sarnane?</span>
+                <select data-auto-question>
+                  <option value="2">Jah</option>
+                  <option value="1">Osaliselt</option>
+                  <option value="0">Ei</option>
+                </select>
+              </label>
+              <label>
+                <span>Kas inimene saab vastuse enne kasutamist üle vaadata?</span>
+                <select data-auto-question>
+                  <option value="2">Jah</option>
+                  <option value="1">Mõnikord</option>
+                  <option value="0">Ei</option>
+                </select>
+              </label>
+              <label>
+                <span>Kas vea kahju on alguses kontrollitav?</span>
+                <select data-auto-question>
+                  <option value="2">Jah</option>
+                  <option value="1">Vajab kokkulepet</option>
+                  <option value="0">Ei</option>
+                </select>
+              </label>
+              <label>
+                <span>Kas üks vastutaja saab öelda, mis on õige tulemus?</span>
+                <select data-auto-question>
+                  <option value="2">Jah</option>
+                  <option value="1">Võib-olla</option>
+                  <option value="0">Ei</option>
+                </select>
+              </label>
+            </div>
+            <button class="btn btn-primary" type="button" data-auto-calculate>Näita tulemust</button>
+            <div class="tool-result" data-auto-result>
+              <span class="tag">Näidis</span>
+              <h3>Sobib esimeseks kontrolliks</h3>
+              <p>Kui vastus on enamasti “jah”, on tõenäoliselt olemas väike töö, mida saab lihtsamaks teha.</p>
+            </div>
+            <div class="inline-actions">
+              <a class="btn btn-light" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="automation_tool_quick_check">Tee 10 min kontroll</a>
+              <a class="btn btn-secondary dark" href="tel:+37258180435" data-track-event="phone_click" data-track-label="automation_tool_phone">Helista</a>
+            </div>
           </div>
         </div>
       </section>
@@ -274,5 +348,79 @@ const schema = {
         </span>
       </div>
     </footer>
+
+    <script is:inline>
+      const automationTool = document.querySelector("[data-automation-tool]");
+      const automationResult = document.querySelector("[data-auto-result]");
+      const automationButton = document.querySelector("[data-auto-calculate]");
+      let automationToolStarted = false;
+
+      const trackAutomation = (eventName, params = {}) => {
+        if (typeof window.automatiseerimineTrack === "function") {
+          window.automatiseerimineTrack(eventName, {
+            source_site: "automatiseerimine.ee",
+            ...params
+          });
+        }
+      };
+
+      const resultByScore = (score) => {
+        if (score >= 8) {
+          return {
+            tier: "sobib",
+            title: "Sobib väikeseks automaatikaks",
+            text: "See töö kordub piisavalt ja inimene saab alguses tulemust kontrollida. Järgmine samm on kirjeldada töö täpselt ära ja hinnata lihtne lahendus."
+          };
+        }
+        if (score >= 5) {
+          return {
+            tier: "vajab_tapsustamist",
+            title: "Tasub enne täpsustada",
+            text: "Mõte võib olla hea, aga enne ehitamist tuleb selgeks teha vastutaja, vea piir ja see, kust info tuleb."
+          };
+        }
+        return {
+          tier: "mitte_esimene",
+          title: "Praegu mitte esimene valik",
+          text: "Seda tööd ei tasu tõenäoliselt esimesena automatiseerida. Alustage lihtsamast korduvast tööst, kus kontroll on selgem."
+        };
+      };
+
+      automationTool?.addEventListener("change", () => {
+        if (automationToolStarted) return;
+        automationToolStarted = true;
+        trackAutomation("tool_start", {
+          tool_name: "automation_suitability_check"
+        });
+      });
+
+      automationButton?.addEventListener("click", () => {
+        const questions = Array.from(document.querySelectorAll("[data-auto-question]"));
+        const score = questions.reduce((sum, input) => sum + Number(input.value || 0), 0);
+        const result = resultByScore(score);
+
+        if (automationResult) {
+          automationResult.innerHTML = `
+            <span class="tag">Tulemus: ${score}/10</span>
+            <h3>${result.title}</h3>
+            <p>${result.text}</p>
+          `;
+        }
+
+        trackAutomation("tool_completed", {
+          tool_name: "automation_suitability_check",
+          result_score: score,
+          result_tier: result.tier
+        });
+
+        if (result.tier === "sobib") {
+          trackAutomation("result_high_intent", {
+            tool_name: "automation_suitability_check",
+            result_score: score,
+            result_tier: result.tier
+          });
+        }
+      });
+    </script>
   </body>
 </html>
