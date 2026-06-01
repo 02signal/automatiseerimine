@@ -405,6 +405,29 @@ section {
   margin-top: 18px;
 }
 
+.money-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.money-fields label {
+  display: grid;
+  gap: 8px;
+  color: var(--green-dark);
+  font-weight: 820;
+}
+
+.money-fields input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--white);
+  color: var(--ink);
+}
+
 .tool-result {
   margin-top: 18px;
   border: 1px solid var(--line);
@@ -510,6 +533,10 @@ section {
   }
 
   .tool-questions label {
+    grid-template-columns: 1fr;
+  }
+
+  .money-fields {
     grid-template-columns: 1fr;
   }
 
