@@ -1,14 +1,14 @@
 :root {
-  --ink: #17231c;
-  --green: #24563d;
-  --green-dark: #153526;
-  --gold: #d59a2b;
-  --paper: #f5f7f1;
+  --ink: #152234;
+  --green: #176a8a;
+  --green-dark: #102f4a;
+  --gold: #f2a51f;
+  --paper: #f4f7fb;
   --white: #ffffff;
-  --muted: #5f6c62;
-  --line: #d9e0d6;
-  --blue: #245f73;
-  --shadow: 0 18px 44px rgba(23, 35, 28, 0.13);
+  --muted: #5d6b7a;
+  --line: #d7e1eb;
+  --blue: #0f5f9c;
+  --shadow: 0 18px 44px rgba(21, 34, 52, 0.13);
 }
 
 * {
@@ -60,7 +60,7 @@ textarea {
 .brand {
   text-decoration: none;
   font-weight: 900;
-  color: var(--green-dark);
+  color: var(--blue);
   font-size: 1.2rem;
 }
 
@@ -82,7 +82,7 @@ textarea {
   align-items: center;
   color: var(--white);
   background:
-    linear-gradient(90deg, rgba(21, 53, 38, 0.94) 0%, rgba(21, 53, 38, 0.78) 45%, rgba(21, 53, 38, 0.22) 75%),
+    linear-gradient(90deg, rgba(12, 38, 72, 0.95) 0%, rgba(12, 38, 72, 0.78) 46%, rgba(12, 38, 72, 0.18) 75%),
     url("/hero-automatiseerimine.png") center right / cover no-repeat;
 }
 
@@ -189,6 +189,32 @@ h1 {
   display: block;
   color: rgba(255, 255, 255, 0.76);
   font-size: 0.9rem;
+}
+
+.automation-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  max-width: 820px;
+  margin-top: 18px;
+}
+
+.automation-strip span,
+.automation-strip strong {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 820;
+}
+
+.automation-strip strong {
+  color: #ffd58a;
 }
 
 section {
@@ -370,7 +396,7 @@ section {
 
 .footer {
   padding: 30px 0;
-  background: #101b15;
+  background: #081f35;
   color: rgba(255, 255, 255, 0.78);
   font-size: 0.92rem;
 }
@@ -393,6 +419,7 @@ section {
 
   .navlinks,
   .proof,
+  .automation-strip,
   .grid-3,
   .grid-2,
   .contact {
@@ -409,5 +436,9 @@ section {
 
   .btn {
     width: 100%;
+  }
+
+  .automation-strip {
+    align-items: stretch;
   }
 }
