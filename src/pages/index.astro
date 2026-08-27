@@ -274,6 +274,28 @@ const schema = {
               <h3>Umbes 180 € kuus</h3>
               <p>Kui töö kordub iga nädal ja inimene saab tulemuse üle vaadata, võib väike lahendus end mõne kuuga ära tasuda.</p>
             </div>
+
+            <div class="tool-lead" data-auto-lead hidden>
+              <h3>Kas vaatame selle töö koos üle?</h3>
+              <p>Jätke oma e-post ja lühike kirjeldus. Inimene vaatab teie vastuse üle ja võtab ühendust.</p>
+              <form data-auto-lead-form novalidate>
+                <label>
+                  <span>Milline korduv töö see on? (valikuline)</span>
+                  <input type="text" maxlength="64" placeholder="nt pakkumiste saatmine, Exceli aruanne" data-lead-field />
+                </label>
+                <label>
+                  <span>E-posti aadress</span>
+                  <input type="email" required maxlength="254" placeholder="teie@ettevote.ee" data-lead-email />
+                </label>
+                <label class="consent">
+                  <input type="checkbox" required data-lead-consent />
+                  <span>Nõustun, et Ettevõtluskeskus OÜ (02Signal) võtab minuga selle töö teemal ühendust ja saadab automatiseerimisega seotud pakkumisi e-mailile. Nõusoleku saan igal ajal tagasi võtta, kirjutades info@02signal.ai.</span>
+                </label>
+                <button class="btn btn-primary" type="submit" data-auto-lead-submit>Palun võtke ühendust</button>
+                <p class="lead-status" data-auto-lead-status role="status" aria-live="polite"></p>
+              </form>
+            </div>
+
             <div class="inline-actions">
               <a class="btn btn-light" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="automation_tool_quick_check">Tee 10 min kontroll</a>
               <a class="btn btn-light" href="https://digiteekaart.ee/" data-track-event="partner_site_click" data-track-label="automation_tool_support">Kontrolli toetuse võimalust</a>
@@ -368,7 +390,14 @@ const schema = {
       const automationTool = document.querySelector("[data-automation-tool]");
       const automationResult = document.querySelector("[data-auto-result]");
       const automationButton = document.querySelector("[data-auto-calculate]");
+      const automationLead = document.querySelector("[data-auto-lead]");
+      const automationLeadForm = document.querySelector("[data-auto-lead-form]");
+      const automationLeadStatus = document.querySelector("[data-auto-lead-status]");
       let automationToolStarted = false;
+      let automationLeadStarted = false;
+      // The last calculated quiz outcome, carried into the lead capture so a
+      // subscriber arrives with what they said (not an anonymous address).
+      let lastQuizOutcome = null;
 
       const trackAutomation = (eventName, params = {}) => {
         if (typeof window.automatiseerimineTrack === "function") {
@@ -457,6 +486,84 @@ const schema = {
             payback_months_low: lowPaybackMonths,
             payback_months_high: highPaybackMonths
           });
+        }
+
+        // Carry the meaningful part of the quiz result into the lead capture
+        // (context.field / context.outcomes on the AMOS envelope) so a
+        // subscriber arrives with what they told us, not an empty address.
+        lastQuizOutcome = {
+          outcomes: [
+            `tulemus_${result.tier}`,
+            `skoor_${score}_10`,
+            `kulu_${monthlyCost}_eur_kuus`,
+            `tasuvus_${lowPaybackMonths}-${highPaybackMonths}_kuud`
+          ]
+        };
+
+        // The moment of highest intent: right after the visitor has just been
+        // told whether their repeated work is worth automating.
+        automationLead?.removeAttribute("hidden");
+      });
+
+      automationLeadForm?.addEventListener("focusin", () => {
+        if (automationLeadStarted) return;
+        automationLeadStarted = true;
+        trackAutomation("lead_form_start", { tool_name: "automation_suitability_check" });
+      });
+
+      automationLeadForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const emailInput = automationLeadForm.querySelector("[data-lead-email]");
+        const fieldInput = automationLeadForm.querySelector("[data-lead-field]");
+        const consentInput = automationLeadForm.querySelector("[data-lead-consent]");
+        const submitButton = automationLeadForm.querySelector("[data-auto-lead-submit]");
+        const email = String(emailInput?.value || "").trim();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (automationLeadStatus) automationLeadStatus.textContent = "";
+
+        if (!emailOk) {
+          if (automationLeadStatus) automationLeadStatus.textContent = "Palun sisesta korrektne e-posti aadress.";
+          emailInput?.focus();
+          return;
+        }
+        if (!consentInput?.checked) {
+          if (automationLeadStatus) automationLeadStatus.textContent = "Palun anna nõusolek, et saaksime ühendust võtta.";
+          consentInput?.focus();
+          return;
+        }
+
+        trackAutomation("lead_form_submit_attempt", { tool_name: "automation_suitability_check" });
+        if (submitButton) submitButton.disabled = true;
+        let succeeded = false;
+
+        try {
+          const response = await fetch("/api/subscribe", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              kind: "topic_subscribe",
+              email,
+              topic: "automatiseerimine",
+              field: String(fieldInput?.value || "").trim().slice(0, 64) || null,
+              outcomes: lastQuizOutcome?.outcomes || [],
+              source_site: "funnel_automatiseerimine"
+            })
+          });
+          const payload = await response.json().catch(() => null);
+          if (response.ok && payload?.ok) {
+            succeeded = true;
+            trackAutomation("lead_form_submit", { tool_name: "automation_suitability_check" });
+            automationLeadForm.reset();
+            [emailInput, fieldInput, consentInput].forEach((el) => { if (el) el.disabled = true; });
+            if (automationLeadStatus) automationLeadStatus.textContent = "Aitäh! Vaatame üle ja võtame peagi ühendust.";
+          } else if (automationLeadStatus) {
+            automationLeadStatus.textContent = payload?.message || "Saatmine ebaõnnestus. Proovi hiljem uuesti või helista +372 5818 0435.";
+          }
+        } catch {
+          if (automationLeadStatus) automationLeadStatus.textContent = "Saatmine ebaõnnestus. Proovi hiljem uuesti või helista +372 5818 0435.";
+        } finally {
+          if (submitButton) submitButton.disabled = succeeded;
         }
       });
     </script>

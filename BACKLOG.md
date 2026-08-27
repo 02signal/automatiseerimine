@@ -11,7 +11,15 @@
 
 - Improve the repeated-work calculator with clearer examples by business type.
 - Add one small case example: "Excelist teavituseni" with rough before/after numbers.
-- Add a local lead form later if the current 02Signal quick-check route loses intent.
+- Local lead form shipped on the quiz result (feat/automatiseerimine-lead-capture): posts to
+  `api/subscribe.js` -> AMOS outreach-capture -> Listmonk double opt-in, same proven pattern as
+  mikrokvalifikatsioon.ee. Requires `AMOS_TOPIC_CAPTURE_URL` and `AMOS_CAPTURE_TOKEN` set in this
+  Vercel project (same ingress/token mkval already uses) before the form works in production —
+  without them it fails honestly with a 503, it does not silently drop leads.
+- `funnel_automatiseerimine` currently maps to the shared `evk_base` brand_key in AMOS
+  (infra/services/outreach-capture/app/service.mjs CAPTURE_SITE_TO_BRAND_KEY), not a dedicated
+  "automatiseerimine" brand. Fine for now; flag if this brand needs its own brand_key later for
+  CRM segmentation.
 
 ## Digitaliseerimine.ee
 
