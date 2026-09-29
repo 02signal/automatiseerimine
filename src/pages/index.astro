@@ -142,7 +142,7 @@ const schema = {
             Näidake meile ühte tüütut tööd ja ütleme maakeeli, kas seda saab lihtsamaks teha.
           </p>
           <div class="actions">
-            <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="hero_quick_check">Tee 10 min tasuta kontroll</a>
+            <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="hero_quick_check">Tee 10 min kontroll</a>
             <a class="btn btn-secondary" href="tel:+37258180435" data-track-event="phone_click" data-track-label="hero_phone">Helista +372 5818 0435</a>
           </div>
           <div class="proof">
@@ -315,7 +315,7 @@ const schema = {
           <div class="steps">
             <div class="step"><strong>01</strong><div><h3>Nimetame tüütu töö ära</h3><p>Mis võtab aega? Kes teeb? Kui tihti? Mis on tulemus?</p></div></div>
             <div class="step"><strong>02</strong><div><h3>Kontrollime, kas seda saab lihtsustada</h3><p>Kas info on olemas, viga ei ole liiga kallis ja inimene saab tulemuse üle vaadata?</p></div></div>
-            <div class="step"><strong>03</strong><div><h3>Ütleme ausalt järgmise sammu</h3><p>Kas teha väike abiline, alustada stardiplaanist või jätta praegu tegemata.</p></div></div>
+            <div class="step"><strong>03</strong><div><h3>Ütleme selgelt järgmise sammu</h3><p>Kas teha väike abiline, alustada stardiplaanist või jätta praegu tegemata.</p></div></div>
           </div>
         </div>
       </section>
@@ -323,26 +323,26 @@ const schema = {
       <section id="hinnad" class="white">
         <div class="section-inner">
           <div class="section-head">
-            <span class="kicker">Hind peab olema arusaadav</span>
+            <span class="kicker">Kolm sammu</span>
             <h2>Alustame väikese riskiga.</h2>
           </div>
           <div class="grid-3">
             <article class="card price">
               <h3>Kiirkontroll</h3>
               <p>Saate esmase pildi, kas teie töös on automatiseerimise koht.</p>
-              <strong>0 €</strong>
+              <strong>Ilma kohustuseta</strong>
               <ul class="check"><li>10 minutit</li><li>tulemus kohe ekraanil</li><li>hea ettevalmistus kõneks</li></ul>
             </article>
             <article class="card price">
               <h3>Omaniku nõu</h3>
               <p>Vaatame 2-3 tüütut tööd läbi ja anname selge soovituse.</p>
-              <strong>490 € + KM</strong>
+              <strong>Fikseeritud, väike maht</strong>
               <ul class="check"><li>90 min kohtumine</li><li>üks soovitatud esimene töö</li><li>hinnavahemik ja riskid</li></ul>
             </article>
             <article class="card price">
               <h3>Stardiplaan</h3>
               <p>Kui kohti on mitu, valime ühe mõistliku alguse ja paneme plaani kirja.</p>
-              <strong>al 1 900 € + KM</strong>
+              <strong>Piiratud, kokkulepitud maht</strong>
               <ul class="check"><li>korduvate tööde kaart</li><li>mida teha ja mida vältida</li><li>järgmine ehituse samm</li></ul>
             </article>
           </div>
@@ -359,7 +359,7 @@ const schema = {
               pakume väikese ja kontrollitava esimese sammu.
             </p>
             <div class="inline-actions">
-              <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="contact_quick_check">Tee tasuta kontroll</a>
+              <a class="btn btn-primary" href={quickCheckUrl} data-track-event="quick_check_click" data-track-label="contact_quick_check">Tee kiire kontroll</a>
               <a class="btn btn-secondary" href="tel:+37258180435" data-track-event="phone_click" data-track-label="contact_phone">Helista +372 5818 0435</a>
             </div>
           </div>
@@ -463,7 +463,7 @@ const schema = {
             <span class="tag">Tulemus: ${score}/10</span>
             <h3>${result.title}</h3>
             <p>Ligikaudne ajakulu on ${monthlyHours} tundi kuus. Rahas on see umbes ${monthlyCost.toLocaleString("et-EE")} € kuus.</p>
-            <p>${result.text} Väikese töö hinnaraam on tihti umbes 900-1900 € + KM. Sellise arvestusega oleks tasuvuse aeg ligikaudu ${lowPaybackMonths}-${highPaybackMonths} kuud.</p>
+            <p>${result.text} Väikese töö maht on tihti piiratud ja hind lepitakse kokku enne alustamist. Sellise arvestusega oleks tasuvuse aeg ligikaudu ${lowPaybackMonths}-${highPaybackMonths} kuud.</p>
           `;
         }
 
