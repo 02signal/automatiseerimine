@@ -289,7 +289,11 @@ const schema = {
                 </label>
                 <label class="consent">
                   <input type="checkbox" required data-lead-consent />
-                  <span>Nõustun, et Ettevõtluskeskus OÜ (02Signal) võtab minuga selle töö teemal ühendust ja saadab automatiseerimisega seotud pakkumisi e-mailile. Nõusoleku saan igal ajal tagasi võtta, kirjutades info@02signal.ai.</span>
+                  <span>Nõustun, et Ettevõtluskeskus OÜ (02Signal) võtab minuga selle töö teemal ühendust.</span>
+                </label>
+                <label class="consent">
+                  <input type="checkbox" data-lead-offers />
+                  <span>Soovin saada automatiseerimisega seotud pakkumisi e-mailile (valikuline). Nõusoleku saan igal ajal tagasi võtta, kirjutades info@02signal.ai.</span>
                 </label>
                 <button class="btn btn-primary" type="submit" data-auto-lead-submit>Palun võtke ühendust</button>
                 <p class="lead-status" data-auto-lead-status role="status" aria-live="polite"></p>
@@ -516,6 +520,7 @@ const schema = {
         const emailInput = automationLeadForm.querySelector("[data-lead-email]");
         const fieldInput = automationLeadForm.querySelector("[data-lead-field]");
         const consentInput = automationLeadForm.querySelector("[data-lead-consent]");
+        const offersInput = automationLeadForm.querySelector("[data-lead-offers]");
         const submitButton = automationLeadForm.querySelector("[data-auto-lead-submit]");
         const email = String(emailInput?.value || "").trim();
         const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -542,11 +547,15 @@ const schema = {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
-              kind: "topic_subscribe",
+              // amos-ops#1944: lepingueelne päring → CS saab kohe teate (vajadus + e-post).
+              kind: "b2b_inquiry",
               email,
               topic: "automatiseerimine",
-              field: String(fieldInput?.value || "").trim().slice(0, 64) || null,
-              outcomes: lastQuizOutcome?.outcomes || [],
+              request_summary: [
+                String(fieldInput?.value || "").trim() && `Korduv töö: ${String(fieldInput?.value || "").trim()}`,
+                (lastQuizOutcome?.outcomes || []).length && `Kontrolli tulemus: ${(lastQuizOutcome?.outcomes || []).join(", ")}`,
+              ].filter(Boolean).join(" · ").slice(0, 600),
+              consentOffers: Boolean(offersInput?.checked),
               source_site: "funnel_automatiseerimine"
             })
           });
@@ -555,7 +564,7 @@ const schema = {
             succeeded = true;
             trackAutomation("lead_form_submit", { tool_name: "automation_suitability_check" });
             automationLeadForm.reset();
-            [emailInput, fieldInput, consentInput].forEach((el) => { if (el) el.disabled = true; });
+            [emailInput, fieldInput, consentInput, offersInput].forEach((el) => { if (el) el.disabled = true; });
             if (automationLeadStatus) automationLeadStatus.textContent = "Aitäh! Vaatame üle ja võtame peagi ühendust.";
           } else if (automationLeadStatus) {
             automationLeadStatus.textContent = payload?.message || "Saatmine ebaõnnestus. Proovi hiljem uuesti või helista +372 5818 0435.";
