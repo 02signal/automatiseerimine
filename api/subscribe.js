@@ -27,7 +27,11 @@
 
 const ALLOWED_TOPICS = new Set(['automatiseerimine']);
 const ALLOWED_SITES = new Set(['funnel_automatiseerimine']);
-const ALLOWED_KINDS = new Set(['topic_subscribe']);
+const ALLOWED_KINDS = new Set(['topic_subscribe', 'b2b_inquiry']);
+// amos-ops#1944 (omanik 12.–13.11): „Palun võtke ühendust“ läheb AMOS-i lepingueelse päringuna (kind b2b_inquiry):
+// CS saab kohe teate vajaduse ja e-postiga; DOI kirja ei tule. Pakkumised ainult eraldi, vaikimisi märkimata
+// linnukesega (consent_purpose_secondary → AMOS-i eraldi DOI kaasümbrik).
+const MAX_SUMMARY_LEN = 600;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Bounded per the shared envelope contract (infra/contracts/outreach/
@@ -166,13 +170,20 @@ export default async function handler(req, res) {
         kind,
         email,
         interest_topic: topic,
-        ...(field ? { field } : {}),
-        ...(outcomes.length ? { outcomes } : {}),
-        // Automatiseerimine sells B2B advisory work (Kiirkontroll / Omaniku
-        // nõu / Stardiplaan), not a course — b2b_outreach is the correct
-        // ratified consent purpose (amos.outreach.lead_capture/v1), distinct
-        // from course_offers.
-        consent_purpose: 'b2b_outreach',
+        ...(kind === 'b2b_inquiry'
+          ? {
+              ...(cleanText(body.request_summary, MAX_SUMMARY_LEN) ? { request_summary: cleanText(body.request_summary, MAX_SUMMARY_LEN) } : {}),
+              ...(body.consentOffers === true ? { consent_purpose_secondary: 'b2b_outreach' } : {}),
+            }
+          : {
+              ...(field ? { field } : {}),
+              ...(outcomes.length ? { outcomes } : {}),
+              // Automatiseerimine sells B2B advisory work (Kiirkontroll / Omaniku
+              // nõu / Stardiplaan), not a course — b2b_outreach is the correct
+              // ratified consent purpose (amos.outreach.lead_capture/v1), distinct
+              // from course_offers.
+              consent_purpose: 'b2b_outreach',
+            }),
         source_site: sourceSite,
         captured_at: new Date().toISOString(),
       }),
